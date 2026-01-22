@@ -132,7 +132,7 @@ async function editInvoice(id) {
 async function viewInvoice(id) {
   const inv = await fetch(`${API}/${id}`).then(r => r.json());
   printArea.innerHTML = `
-    <center><h3>Cash Invoice</h3></center>
+    <center><h3>Cash Invoice</h3>
     <p>${inv.customerName}</p>
     ${inv.items.map(i =>
       `<div>${i.description} ${i.qty} x ${i.price}</div>`
@@ -140,7 +140,7 @@ async function viewInvoice(id) {
     <h3>Total: ${inv.total}</h3>
     <button onclick="printInvoice()">Print</button>
 
-    <center>    
+  
     <h3>Received Cash Payment by:</h3>
     <h3>Signed: _____________________________________</h3>
     <h3>Margarito V. Balatero Jr.</h3>

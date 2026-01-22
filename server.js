@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 mongoose.connect(
-  "mongodb+srv://junjie:junjiexx@junjiecluster.1cawbvg.mongodb.net/cash_invoicee?retryWrites=true&w=majority&appName=invoice_cash"
+  "mongodb+srv://junjie:junjie55@junjiecluster.1cawbvg.mongodb.net/cash_invoicee?retryWrites=true&w=majority&appName=invoice_cash"
 );
 
 const InvoiceSchema = new mongoose.Schema({
