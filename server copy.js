@@ -3,11 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
-import dotenv from "dotenv";
 import { fileURLToPath } from "url";
-
-// LOAD ENV
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,15 +13,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// CONNECT DB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  });
+mongoose.connect(
+  "mongodb+srv://junjie:junjie55@junjiecluster.1cawbvg.mongodb.net/cash_invoicee?retryWrites=true&w=majority&appName=invoice_cash"
+);
 
-// SCHEMA
 const InvoiceSchema = new mongoose.Schema({
   customerName: String,
   items: [
@@ -57,7 +48,7 @@ app.get("/api/invoices/:id", async (req, res) => {
   res.json(await Invoice.findById(req.params.id));
 });
 
-// UPDATE
+// UPDATE (EDIT) — STABLE
 app.put("/api/invoices/:id", async (req, res) => {
   const updated = await Invoice.findByIdAndUpdate(
     req.params.id,
@@ -73,8 +64,4 @@ app.delete("/api/invoices/:id", async (req, res) => {
   res.json({ success: true });
 });
 
-// START SERVER
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () =>
-  console.log(`Server running on port ${PORT}`)
-);
+app.listen(3000, () => console.log("Server running on port 3000"));
