@@ -22,6 +22,12 @@ function addItem() {
   document.getElementById("price").value = "";
 }
 
+const peso = new Intl.NumberFormat("en-PH", {
+  style: "currency",
+  currency: "PHP"
+});
+
+
 // RENDER EDITABLE ITEMS
 function renderItems() {
   const tbody = document.getElementById("items");
@@ -112,7 +118,7 @@ async function loadInvoices() {
   const data = await fetch(API).then(r => r.json());
   invoiceList.innerHTML = data.map(i =>
     `<li>
-      ${i.customerName} - ${i.total}
+     ${i.customerName} - ${peso.format(i.total)}
       <button onclick="editInvoice('${i._id}')">Edit</button>
       <button onclick="viewInvoice('${i._id}')">View</button>
       <button onclick="deleteInvoice('${i._id}')">Delete</button>
@@ -135,9 +141,10 @@ async function viewInvoice(id) {
     <center><h3>Cash Invoice</h3>
     <p>${inv.customerName}</p>
     ${inv.items.map(i =>
-      `<div>${i.description} ${i.qty} x ${i.price}</div>`
-    ).join("")}
-    <h3>Total: ${inv.total}</h3>
+  `<div>${i.description} ${i.qty} x ${peso.format(i.price)}</div>`
+).join("")}
+<h3>Total: ${peso.format(inv.total)}</h3>
+
     <button onclick="printInvoice()">Print</button>
 
   
