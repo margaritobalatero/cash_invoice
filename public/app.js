@@ -1,4 +1,5 @@
-const API = "http://localhost:3000/api/invoices";
+const API = "/api/invoices";
+// const API = "http://localhost:3000/api/invoices";
 
 let items = [];
 let editingId = null;
